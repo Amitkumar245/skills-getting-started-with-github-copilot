@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
+      console.log("Fetching activities from /activities...");
       const response = await fetch("/activities");
       const activities = await response.json();
 
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <p><strong>Avaiablity seat:</strong> ${spotsLeft} spots left</p>
         `;
 
         // Add participants section
@@ -84,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       const result = await response.json();
+      console.log("Signup response:", response.status, result);
 
       if (response.ok) {
         messageDiv.textContent = result.message;
