@@ -162,13 +162,24 @@ footer {
 }
 
 .participants-list {
-  list-style-type: disc;
-  list-style-position: inside;
+  list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+.delete-participant-btn {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #d32f2f;
+  transition: color 0.2s;
+}
+.delete-participant-btn:hover {
+  color: #b71c1c;
 }
 
 .participant-item {

@@ -42,7 +42,34 @@ document.addEventListener("DOMContentLoaded", () => {
           details.participants.forEach((participant) => {
             const li = document.createElement("li");
             li.className = "participant-item";
-            li.textContent = participant;
+            li.style.display = "flex";
+            li.style.alignItems = "center";
+
+            const nameSpan = document.createElement("span");
+            nameSpan.textContent = participant;
+            nameSpan.style.flexGrow = "1";
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "🗑️";
+            deleteBtn.title = "Unregister participant";
+            deleteBtn.className = "delete-participant-btn";
+            deleteBtn.addEventListener("click", async () => {
+              // Call API to unregister participant
+              try {
+                const response = await fetch(`/activities/${encodeURIComponent(name)}/unregister?email=${encodeURIComponent(participant)}`, { method: "POST" });
+                if (response.ok) {
+                  // Refresh activities to update UI
+                  fetchActivities();
+                } else {
+                  alert("Failed to unregister participant.");
+                }
+              } catch (err) {
+                alert("Error unregistering participant.");
+              }
+            });
+
+            li.appendChild(nameSpan);
+            li.appendChild(deleteBtn);
             ul.appendChild(li);
           });
           participantsSection.appendChild(ul);
